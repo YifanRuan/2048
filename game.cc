@@ -1,6 +1,27 @@
 #include "game.h"
 using namespace std;
 
+pair<int, int> GetArg(int argc, char *argv[]) {
+    int c;
+    pair<int, int> ret = make_pair(2048, 4);
+    while ((c = getopt(argc, argv, "ts:")) != -1) {
+        switch (c) {
+        case 't':
+            ret.first = 64;
+            break;
+        case 's':
+            if (strlen(optarg) > 0 && optarg[0] >= '3' && optarg[0] <= '5')
+                ret.second = optarg[0] - '0';
+            break;
+        case '?':
+            break;
+        default:
+            break;
+        }
+    }
+    return ret;
+}
+
 Direction GetInput() {
     string s = "0";
     static map<string, Direction> string_to_direction = {
@@ -13,7 +34,7 @@ Direction GetInput() {
 }
 
 void PlayGame(Status *status) {
-    static const int kDirection = 4, kSize = 16;
+    int kDirection = 4, kSize = status->GetSize();
     status->OutputGraph();
 
     while (!status->IsWin()) {

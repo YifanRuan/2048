@@ -4,11 +4,10 @@
 #include "status.h"
 using namespace std;
 
-int main(int argc, const char *argv[]) {
+int main(int argc, char *argv[]) {
     srand(unsigned(time(NULL)));
-    Status status = Status(ChooseMode());
-    if (argc > 1 && strcasecmp(argv[1], "-t") == 0)
-        status.SetEndNum(64);
+    pair<int, int> pi = GetArg(argc, argv);
+    Status status = Status(ChooseMode(), pi.first, pi.second);
     PlayGame(&status);
     return 0;
 }

@@ -1,14 +1,14 @@
 #include "status.h"
 using namespace std;
 
-Status::Status() { Init(Single); }
-Status::Status(int argument) {
+Status::Status() { Init(Single, 2048, 4); }
+Status::Status(int argument, int end, int side) {
     mode_ = Mode(argument);
-    Init(mode_);
+    Init(mode_, end, side);
 }
 
 void Status::OutputGraph() const {
-    for (int i = 0; i < kSide; ++i) {
+    for (int i = 0; i < side_; ++i) {
         OutputDivs();
         OutputNums(i);
     }
@@ -20,9 +20,9 @@ void Status::Update(Direction direction) {
     int operate_order = pair_direction.first + pair_direction.second;
     fill(is_merge_.begin(), is_merge_.end(), false);
 
-    for (int i = 0; i < kSize; ++i) {
+    for (int i = 0; i < size_; ++i) {
         bool is_inbound = true;
-        int current_position = operate_order > 0 ? (kSize - i - 1) : i;
+        int current_position = operate_order > 0 ? (size_ - i - 1) : i;
         if (value_[current_position] == 0)
             continue;
         int next_position;
@@ -36,9 +36,9 @@ void Status::Update(Direction direction) {
             next_pair_position =
                 PairPlus(current_pair_position, pair_direction);
             if (next_pair_position.first < 0 ||
-                next_pair_position.first >= kSide ||
+                next_pair_position.first >= side_ ||
                 next_pair_position.second < 0 ||
-                next_pair_position.second >= kSide) {
+                next_pair_position.second >= side_) {
                 is_inbound = false;
                 break;
             }
@@ -62,7 +62,7 @@ void Status::Update(Direction direction) {
 }
 
 bool Status::operator==(const Status &other) {
-    for (int i = 0; i < kSize; ++i) {
+    for (int i = 0; i < size_; ++i) {
         if (value_[i] != other.value_[i])
             return false;
     }
@@ -84,7 +84,7 @@ bool Status::IsWin() const {
 
 void Status::PickRandomNumber() {
     vector<int> order;
-    for (int i = 0; i < kSize; ++i) {
+    for (int i = 0; i < size_; ++i) {
         if (value_[i] == 0)
             order.push_back(i);
     }
@@ -117,8 +117,9 @@ void Status::PrintWinner() const {
     }
 }
 
-void Status::Init(Mode mode) {
-    end_num_ = 2048, point_[0] = point_[1] = 0;
+void Status::Init(Mode mode, int end, int side) {
+    end_num_ = end, point_[0] = point_[1] = 0;
+    side_ = side, size_ = side * side;
     direction_to_pair_ = {{W, {-1, 0}}, {A, {0, -1}}, {S, {1, 0}}, {D, {0, 1}}};
     if (mode == Single) {
         current_player_ = 0;
@@ -130,7 +131,7 @@ void Status::Init(Mode mode) {
         }
         current_player_ = 1;
     }
-    for (int i = 0; i < kSize; ++i) {
+    for (int i = 0; i < size_; ++i) {
         value_.push_back(0);
         is_merge_.push_back(false);
     }
@@ -139,14 +140,14 @@ void Status::Init(Mode mode) {
 }
 
 void Status::OutputDivs() const {
-    for (int i = 0; i < kSide; ++i)
+    for (int i = 0; i < side_; ++i)
         printf("+-----");
     printf("+\n");
 }
 
 void Status::OutputNums(int row) const {
-    for (int i = 0; i < kSide; ++i) {
-        printf("|%5d", value_[kSide * row + i]);
+    for (int i = 0; i < side_; ++i) {
+        printf("|%5d", value_[side_ * row + i]);
     }
     printf("|\n");
 }
