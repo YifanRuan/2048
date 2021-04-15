@@ -1,10 +1,10 @@
 #include "status.h"
 using namespace std;
 
-Status::Status() { Init(); }
+Status::Status() { Init(Single); }
 Status::Status(int argument) {
-  Init();
-  end_num_ = argument;
+  mode_ = Mode(argument);
+  Init(mode_);
 }
 
 void Status::OutputGraph() const {
@@ -49,6 +49,7 @@ void Status::Update(Direction direction) {
     if (is_inbound && value_[next_position] == value_[current_position] &&
         !is_merge_[next_position]) {
       value_[next_position] += value_[current_position];
+      point_[current_player_] += value_[next_position];
       value_[current_position] = 0;
       is_merge_[next_position] = true;
     }
@@ -64,7 +65,13 @@ bool Status::operator==(const Status &other) {
 
 bool Status::IsWin() const {
   for (auto it : value_) {
-    if (it == end_num_) return true;
+    if (it == end_num_) {
+      if (mode_ == Dual)
+        PrintWinner();
+      else
+        printf("Your score is %d.\nYou win!!\n", point_[0]);
+      return true;
+    }
   }
   return false;
 }
@@ -85,7 +92,35 @@ int Status::GetNonZeros() const {
   return cnt;
 }
 
-void Status::Init() {
+void Status::PrintWinner() const {
+  if (mode_ == Single) {
+    printf("Your score is %d.\nYou lose!!\n", point_[0]);
+  } else {
+    cout << player_name_[0] << " scores " << point_[0] << ".\n";
+    cout << player_name_[1] << " scores " << point_[1] << ".\n";
+    if (point_[0] == point_[1]) {
+      printf("Tie!!\n");
+    } else if (point_[0] > point_[1]) {
+      cout << player_name_[0] << " wins!!\n";
+    } else {
+      cout << player_name_[1] << " wins!!\n";
+    }
+  }
+}
+
+void Status::Init(Mode mode) {
+  end_num_ = 2048, point_[0] = point_[1] = 0;
+  direction_to_pair_ = {{W, {-1, 0}}, {A, {0, -1}}, {S, {1, 0}}, {D, {0, 1}}};
+  if (mode == Single) {
+    current_player_ = 0;
+    player_name_[0] = "You";
+  } else {
+    for (int i = 0; i < 2; ++i) {
+      printf("Please input player %d's name: ", i + 1);
+      cin >> player_name_[i];
+    }
+    current_player_ = 1;
+  }
   for (int i = 0; i < kSize; ++i) {
     value_.push_back(0);
     is_merge_.push_back(false);
@@ -104,4 +139,13 @@ void Status::OutputNums(int row) const {
     printf("|%5d", value_[kSide * row + i]);
   }
   printf("|\n");
+}
+
+void Status::OutputPoints() const {
+  if (mode_ == Dual) {
+    cout << player_name_[current_player_] << " has ";
+    cout << point_[current_player_] << " points now.\n\n";
+  } else {
+    printf("Now you have %d points.\n\n", point_[current_player_]);
+  }
 }

@@ -1,11 +1,13 @@
 # 2048
 Writer: Yifan Ruan ([20302010010](20302010010@fudan.edu.cn))
 
+Latest Build: ver. 0.3, 2021/3/30, Windows EXE
+
 _Note: this game uses WASD to control, NOT WAZS._
 
 ## Test Environment
 ### Windows10 20H2
-MinGW + GCC 10.2.0
+MinGW + GCC 9.3.0
 ### macOS 11.2.3
 GCC 10.2.0 (Installed from Homebrew)
 
@@ -16,22 +18,20 @@ Tutorial: [https://github.com/khaveesh/macOS-bits-stdc-.h](#)
 GCC 9.3.0
 
 ## Compile Command
-### Windows
-`g++ -O2 lab2.cc status.cc game.cc status.h game.h -o lab2.exe`
+### Windows (Powershell)
+`g++ -O2 main.cc status.cc game.cc status.h game.h -o main.exe`
 ### macOS
-`g++-10 -O2 lab2.cc status.cc game.cc status.h game.h -o lab2`
+`g++-10 -O2 main.cc status.cc game.cc status.h game.h -o main`
 
 _Note: Don't use clang on that command._
 
 To use `g++` instead of `g++-10`, check your GCC version using `g++ --version`.
 ### Linux
-`g++ -O2 lab2.cc status.cc game.cc status.h game.h -o lab2`
+`g++ -O2 main.cc status.cc game.cc status.h game.h -o main`
 
 ## Usage
-Please run in the same directory!
+`./main [Option]`
 ### Option
 `-t` : Set the ending number to 64. Default is 2048.
-#### Windows
-`./lab2.exe [Option]`
-#### macOS & Linux
-`./lab2 [Option]`
+
+_Please run in the same directory!_
