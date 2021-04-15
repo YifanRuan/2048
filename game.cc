@@ -10,8 +10,12 @@ pair<int, int> GetArg(int argc, char *argv[]) {
             ret.first = 64;
             break;
         case 's':
-            if (strlen(optarg) > 0 && optarg[0] >= '3' && optarg[0] <= '5')
-                ret.second = optarg[0] - '0';
+            while (!(strlen(optarg) == 1 && optarg[0] >= '3' &&
+                     optarg[0] <= '5')) {
+                printf("Wrong input format! Please input 3 or 4 or 5!\n");
+                scanf("%s", optarg);
+            }
+            ret.second = optarg[0] - '0';
             break;
         case '?':
             break;
