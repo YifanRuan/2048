@@ -26,10 +26,10 @@ pair<int, int> GetArg(int argc, char *argv[]) {
     return ret;
 }
 
-Direction GetInput() {
+Status::Direction GetInput() {
     string s = "0";
-    static map<string, Direction> string_to_direction = {
-        {"w", W}, {"a", A}, {"s", S}, {"d", D}};
+    static map<string, Status::Direction> string_to_direction = {
+        {"w", Status::W}, {"a", Status::A}, {"s", Status::S}, {"d", Status::D}};
     do {
         getline(cin, s);
         transform(s.begin(), s.end(), s.begin(), ::tolower);
@@ -38,7 +38,7 @@ Direction GetInput() {
 }
 
 void PlayGame(Status *status) {
-    int kDirection = 4, kSize = status->GetSize();
+    int kDirection = 4, kSize = status->size();
     status->OutputGraph();
 
     while (!status->IsWin()) {
@@ -49,7 +49,7 @@ void PlayGame(Status *status) {
 
         for (int i = 0; i < kDirection; ++i) {
             next_status[i] = *status;
-            next_status[i].Update(Direction(i));
+            next_status[i].Update(Status::Direction(i));
             if (next_status[i] == *status)
                 is_same_status[i] = true;
             next_status[i].PickRandomNumber();
@@ -63,7 +63,7 @@ void PlayGame(Status *status) {
         }
 
         status->OutputPlayer();
-        Direction direction = GetInput();
+        Status::Direction direction = GetInput();
         if (!is_same_status[direction])
             *status = next_status[direction];
         status->OutputGraph();

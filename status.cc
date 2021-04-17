@@ -117,6 +117,15 @@ void Status::PrintWinner() const {
     }
 }
 
+void Status::OutputPoints() const {
+    if (mode_ == Dual) {
+        cout << player_name_[current_player_] << " has ";
+        cout << point_[current_player_] << " points now.\n\n";
+    } else {
+        printf("Now you have %d points.\n\n", point_[current_player_]);
+    }
+}
+
 void Status::Init(Mode mode, int end, int side) {
     end_num_ = end, point_[0] = point_[1] = 0;
     side_ = side, size_ = side * side;
@@ -150,13 +159,4 @@ void Status::OutputNums(int row) const {
         printf("|%5d", value_[side_ * row + i]);
     }
     printf("|\n");
-}
-
-void Status::OutputPoints() const {
-    if (mode_ == Dual) {
-        cout << player_name_[current_player_] << " has ";
-        cout << point_[current_player_] << " points now.\n\n";
-    } else {
-        printf("Now you have %d points.\n\n", point_[current_player_]);
-    }
 }
