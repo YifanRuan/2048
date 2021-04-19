@@ -42,13 +42,16 @@ Status::Direction GetInput(string *cheat, bool *can_cheat) {
         if (*can_cheat && s == "c") {
             cin >> *cheat;
             *can_cheat = false;
-            printf("bingo!%s\n", cheat->c_str());
+            printf("Cheat! %s\n", cheat->c_str());
         } else if (string_to_direction.count(s)) {
             ClearCin();
             return string_to_direction[s];
         } else {
             ClearCin();
-            printf("Wrong input format! Please input again: ");
+            if (s == "c" && *can_cheat == false)
+                printf("You can't cheat any more. Please input from wasd: ");
+            else
+                printf("Wrong input format! Please input again: ");
         }
     }
 }
@@ -60,7 +63,7 @@ void GetCheat(string cheat, Status::Direction direction) {
     static map<string, Status::Direction> string_to_direction = {
         {"w", Status::W}, {"a", Status::A}, {"s", Status::S}, {"d", Status::D}};
     do {
-        printf("[%s] please press %c: ", cheat.c_str(),
+        printf("[%s] Agree press %c: ", cheat.c_str(),
                direction_to_char[direction]);
         getline(cin, s);
         transform(s.begin(), s.end(), s.begin(), ::tolower);
@@ -75,7 +78,6 @@ void PlayGame(Status *status) {
     string cheat[2];
     bool can_cheat[2] = {false, false};
     bool is_cheated[2] = {false, false};
-
     if (game_mode == Status::Dual)
         can_cheat[0] = can_cheat[1] = true;
 
@@ -92,7 +94,6 @@ void PlayGame(Status *status) {
         for (int i = 0; i < kDirection; ++i) {
             next_status[i] = *status;
             next_status[i].Update(Status::Direction(i));
-
             if (next_status[i] == *status) {
                 is_same_status[i] = true;
             } else {
@@ -103,15 +104,13 @@ void PlayGame(Status *status) {
             if (non_zeros != game_size || !(next_status[i] == *status))
                 is_dead = false;
         }
-
         if (is_dead) {
             status->PrintWinner();
             break;
         }
-
         status->OutputPlayer();
-        Status::Direction direction;
 
+        Status::Direction direction;
         int player = status->current_player();
         if (status_num == 1 && !can_cheat[player ^ 1] && !is_cheated[player]) {
             is_cheated[player] = true;
@@ -119,8 +118,9 @@ void PlayGame(Status *status) {
             direction = last_direction;
         } else {
             direction = GetInput(&cheat[player ^ 1], &can_cheat[player]);
+            if (can_cheat[player] == false)
+                can_cheat[player ^ 1] = false;
         }
-
         if (!is_same_status[direction])
             *status = next_status[direction];
         status->OutputGraph();
@@ -140,6 +140,5 @@ int ChooseMode() {
             break;
         printf("Wrong format! Please input 1 or 2 again: ");
     }
-    // scanf("%d", &mode);
     return mode - 1;
 }

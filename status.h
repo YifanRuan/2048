@@ -69,7 +69,6 @@ inline void Status::ChangePlayer() {
 inline void Status::OutputPlayer() const {
     if (mode_ == Dual)
         printf("It's %s's turn.\n", player_name_[current_player_].c_str());
-    // std::cout << "It's " << player_name_[current_player_] << "'s turn.\n";
 }
 
 inline int Status::size() const { return size_; }
