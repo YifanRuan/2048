@@ -1,6 +1,11 @@
 #include "game.h"
 using namespace std;
 
+inline void ClearCin() {
+    string tmp;
+    getline(cin, tmp);
+}
+
 pair<int, int> GetArg(int argc, char *argv[]) {
     int c;
     pair<int, int> ret = make_pair(2048, 4);
@@ -14,6 +19,7 @@ pair<int, int> GetArg(int argc, char *argv[]) {
                      optarg[0] <= '5')) {
                 printf("Wrong size! Please input 2 or 3 or 4 or 5!\n");
                 scanf("%s", optarg);
+                ClearCin();
             }
             ret.second = optarg[0] - '0';
             break;
@@ -38,8 +44,10 @@ Status::Direction GetInput(string *cheat, bool *can_cheat) {
             *can_cheat = false;
             printf("bingo!%s\n", cheat->c_str());
         } else if (string_to_direction.count(s)) {
+            ClearCin();
             return string_to_direction[s];
         } else {
+            ClearCin();
             printf("Wrong input format! Please input again: ");
         }
     }
@@ -54,7 +62,7 @@ void GetCheat(string cheat, Status::Direction direction) {
     do {
         printf("[%s] please press %c: ", cheat.c_str(),
                direction_to_char[direction]);
-        cin >> s;
+        getline(cin, s);
         transform(s.begin(), s.end(), s.begin(), ::tolower);
     } while (!string_to_direction.count(s) ||
              string_to_direction[s] != direction);
@@ -124,6 +132,14 @@ int ChooseMode() {
     printf("Please choose your mode:\n1: Single Player\n2: Dual Player\n");
     printf("Please input the index of your option: ");
     int mode;
-    scanf("%d", &mode);
+    while (true) {
+        string s;
+        getline(cin, s);
+        mode = int(atoll(s.c_str()));
+        if (mode == 1 || mode == 2)
+            break;
+        printf("Wrong format! Please input 1 or 2 again: ");
+    }
+    // scanf("%d", &mode);
     return mode - 1;
 }

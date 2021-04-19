@@ -142,8 +142,8 @@ void Status::Init(Mode mode, int end, int side) {
     } else {
         for (int i = 0; i < 2; ++i) {
             printf("Please input player %d's name: ", i + 1);
-            cin >> player_name_[i];
-            // TODO
+            // cin >> player_name_[i];
+            getline(cin, player_name_[i]);
         }
         current_player_ = 1;
     }
