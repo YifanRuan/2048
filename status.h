@@ -7,6 +7,7 @@
 class Status {
   public:
     enum Direction { W, A, S, D };
+    enum Mode { Single, Dual };
 
     Status();
     Status(int argument, int end, int side);
@@ -33,8 +34,12 @@ class Status {
 
     inline int size() const;
 
+    inline Mode mode() const;
+
+    inline int current_player() const;
+
   private:
-    enum Mode { Single, Dual } mode_;
+    Mode mode_;
 
     void Init(Mode mode, int end, int side);
 
@@ -67,6 +72,10 @@ inline void Status::OutputPlayer() const {
 }
 
 inline int Status::size() const { return size_; }
+
+inline Status::Mode Status::mode() const { return mode_; }
+
+inline int Status::current_player() const { return current_player_; }
 
 inline std::pair<int, int> Status::SingleToPair(int position) {
     return std::make_pair(position / side_, position % side_);
