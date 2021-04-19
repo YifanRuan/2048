@@ -105,22 +105,28 @@ void Status::PrintWinner() const {
     if (mode_ == Single) {
         printf("Your score is %d.\nYou lose!!\n", point_[0]);
     } else {
-        cout << player_name_[0] << " scores " << point_[0] << ".\n";
-        cout << player_name_[1] << " scores " << point_[1] << ".\n";
+        printf("%s scores %d.\n", player_name_[0].c_str(), point_[0]);
+        printf("%s scores %d.\n", player_name_[1].c_str(), point_[1]);
+        // cout << player_name_[0] << " scores " << point_[0] << ".\n";
+        // cout << player_name_[1] << " scores " << point_[1] << ".\n";
         if (point_[0] == point_[1]) {
             printf("Tie!!\n");
         } else if (point_[0] > point_[1]) {
-            cout << player_name_[0] << " wins!!\n";
+            printf("%s wins!!\n", player_name_[0].c_str());
+            // cout << player_name_[0] << " wins!!\n";
         } else {
-            cout << player_name_[1] << " wins!!\n";
+            printf("%s wins!!\n", player_name_[1].c_str());
+            // cout << player_name_[1] << " wins!!\n";
         }
     }
 }
 
 void Status::OutputPoints() const {
     if (mode_ == Dual) {
-        cout << player_name_[current_player_] << " has ";
-        cout << point_[current_player_] << " points now.\n\n";
+        printf("%s has %d points now.\n\n",
+               player_name_[current_player_].c_str(), point_[current_player_]);
+        // cout << player_name_[current_player_] << " has ";
+        // cout << point_[current_player_] << " points now.\n\n";
     } else {
         printf("Now you have %d points.\n\n", point_[current_player_]);
     }
@@ -137,6 +143,7 @@ void Status::Init(Mode mode, int end, int side) {
         for (int i = 0; i < 2; ++i) {
             printf("Please input player %d's name: ", i + 1);
             cin >> player_name_[i];
+            // TODO
         }
         current_player_ = 1;
     }
