@@ -13,9 +13,7 @@ MinGW + GCC 9.3.0
 ### macOS 11.2.3 (v0.4 not tested)
 GCC 10.2.0 (Installed from Homebrew)
 
-_Note: You have to install `bits/stdc++.h` first._
-
-Tutorial: [https://github.com/khaveesh/macOS-bits-stdc-.h](#)
+_Note: You have to install [`bits/stdc++.h`](https://github.com/khaveesh/macOS-bits-stdc-.h) first._
 
 ## Compile Command
 ### Linux
