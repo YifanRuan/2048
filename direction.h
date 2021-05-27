@@ -10,4 +10,4 @@ constexpr int kDirection = 4;
 extern std::map<Direction, char> direction_to_char;
 extern std::map<char, Direction> char_to_direction;
 
-#endif
+#endif // DIRECTION_H_

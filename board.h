@@ -47,4 +47,4 @@ inline int Board::PairToSingle(std::pair<int, int> position) const {
     return position.first * side_ + position.second;
 }
 
-#endif
+#endif // BOARD_H_
