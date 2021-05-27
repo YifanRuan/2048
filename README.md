@@ -1,17 +1,19 @@
 # 2048
 Writer: Yifan Ruan ([20302010010](20302010010@fudan.edu.cn))
 
-Latest Build: v0.4, 2021/4/19, Linux .OUT
+Latest Build: v0.5-beta, 2021/5/23, a version for automated tests
 
-_Note: this game uses WASD to control, NOT WAZS._
+_Note: For versions after v0.5-beta, use WAZS. For lab6, please read `readme.txt`. For earlier versions, this game uses WASD to control, NOT WAZS._
 
 ## Test Environment
-### Ubuntu 20.04.2.0
+### Ubuntu 20.04.2.0 (latest: v0.5-beta)
 GCC 9.3.0
-### Windows10 20H2 (v0.4 not tested)
+### Windows10 20H2 (latest: v0.3)
 MinGW + GCC 9.3.0
-### macOS 11.2.3 (v0.4 not tested)
+### macOS 11.2.3 (latest: v0.5)
 GCC 10.2.0 (Installed from Homebrew)
+
+# Contents below are subject to change!!!
 
 _Note: You have to install [`bits/stdc++.h`](https://github.com/khaveesh/macOS-bits-stdc-.h) first._
 
