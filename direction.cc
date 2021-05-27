@@ -1,6 +1,11 @@
 #include "direction.h"
+using namespace std;
 
-std::map<Direction, char> direction_to_char = {
+map<Direction, char> direction_to_char = {
     {W, 'w'}, {A, 'a'}, {S, 'z'}, {D, 's'}};
-std::map<char, Direction> char_to_direction = {
+
+map<char, Direction> char_to_direction = {
     {'w', W}, {'a', A}, {'z', S}, {'s', D}};
+
+map<Direction, string> direction_to_string = {
+    {W, "Up"}, {A, "Left"}, {S, "Down"}, {D, "Right"}};

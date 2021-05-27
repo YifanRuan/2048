@@ -4,6 +4,7 @@
 #include "direction.h"
 #include "player.h"
 #include <chrono>
+#include <cstdio>
 
 class Log {
   public:
@@ -13,13 +14,14 @@ class Log {
 
     ~Log();
 
-    void PrintMove();
+    void PrintMove(const Player &player, time_t time, Direction dir, int point);
 
-    void PrintBonus();
+    void PrintBonus(const Player &player, time_t time,
+                    std::chrono::duration<double> diff, int point);
 
   private:
     bool is_log_;
-    FILE *fp = nullptr;
+    FILE *fp_ = nullptr;
 };
 
 #endif // LOG_H_
