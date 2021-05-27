@@ -2,6 +2,7 @@
 #define LOG_H_
 
 #include "direction.h"
+#include "log_strategy_interface.h"
 #include "player.h"
 #include <chrono>
 #include <cstdio>
@@ -14,13 +15,10 @@ class Log {
 
     ~Log();
 
-    void PrintMove(const Player &player, time_t time, Direction dir, int point);
-
-    void PrintBonus(const Player &player, time_t time,
-                    std::chrono::duration<double> diff, int point);
+    void PrintLog(const LogStrategyInterface &log) const;
 
   private:
-    bool is_log_;
+    bool is_log_ = false;
     FILE *fp_ = nullptr;
 };
 
