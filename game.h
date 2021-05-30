@@ -40,6 +40,7 @@ class Game {
     Board board_;
     std::vector<Player> player_;
     int turn_, end_num_;
+    // Observer mode
     Log log_;
     Bonus bonus_;
     bool is_first_move_ = true;

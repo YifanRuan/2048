@@ -3,9 +3,10 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 enum Direction { W, A, D, S };
-
+extern std::vector<Direction> dirs;
 constexpr int kDirection = 4;
 
 extern std::map<Direction, char> direction_to_char;

@@ -4,7 +4,7 @@
 using namespace std;
 
 pair<int, bool> Board::Move(Direction direction, Board *to_board) {
-    Board board(value_, side_), *p_board;
+    Board board{value_, side_}, *p_board;
     if (to_board != this) {
         *to_board = *this;
         p_board = this;
@@ -74,10 +74,10 @@ pair<int, bool> Board::Move(Direction direction, Board *to_board) {
 set<Direction> Board::AvailableDirections() {
     set<Direction> ret;
     vector<int> empty_vector(value_.size());
-    for (int i = 0; i < kDirection; ++i) {
+    for (auto it : dirs) {
         Board empty_board(empty_vector, side_);
-        if (Move(Direction(i), &empty_board).second)
-            ret.insert(Direction(i));
+        if (Move(it, &empty_board).second)
+            ret.insert(it);
     }
     return ret;
 }

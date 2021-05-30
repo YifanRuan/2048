@@ -1,6 +1,8 @@
 #include "direction.h"
 using namespace std;
 
+vector<Direction> dirs = {W, A, S, D};
+
 map<Direction, char> direction_to_char = {
     {W, 'w'}, {A, 'a'}, {S, 'z'}, {D, 's'}};
 
