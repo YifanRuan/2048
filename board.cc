@@ -3,6 +3,12 @@
 
 using namespace std;
 
+Board::Board(int side) : side_(side) {
+    value_.resize(side_ * side_, 0);
+    PickRandomNumber();
+    PickRandomNumber();
+}
+
 pair<int, bool> Board::Move(Direction direction, Board *to_board) {
     Board board{value_, side_}, *p_board;
     if (to_board != this) {

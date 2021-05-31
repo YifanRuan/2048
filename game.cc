@@ -1,26 +1,28 @@
 #include "game.h"
 
 using namespace std;
-using namespace std::chrono;
 
-Game::Game(Board board, vector<Player> player, Log log, Bonus bonus,
-           int end_num)
+Game::Game(Board board, vector<Player> player, int end_num)
     : board_(std::move(board)), player_(std::move(player)), end_num_(end_num),
-      turn_(player.size() - 1), log_(std::move(log)), bonus_(std::move(bonus)),
-      previous_time_(system_clock::from_time_t(static_cast<time_t>(1))) {}
+      turn_(player.size() - 1) {}
+
+void Game::Init() {
+    for (auto it : observers_) {
+        it->GameStart();
+        it->NewRound();
+    }
+}
 
 bool Game::Move(Direction dir) {
     pair<int, bool> merge_result = board_.Move(dir, &board_);
     if (merge_result.second) {
         NextPlayer();
-        auto cur_time = system_clock::now();
-        log_.PrintLog(LogMoveStrategy{GetCurPlayer(),
-                                      system_clock::to_time_t(cur_time), dir,
-                                      merge_result.first});
-        player_[turn_].AddPoint(merge_result.first +
-                                bonus_.GetBonusPoint(GetCurPlayer(), &log_,
-                                                     cur_time, previous_time_));
-        previous_time_ = cur_time;
+        player_[turn_].AddPoint(merge_result.first);
+        board_.PickRandomNumber();
+        for (auto it : observers_) {
+            it->PointIncremented(merge_result.first);
+            it->NewRound();
+        }
         return true;
     } else {
         return false;
@@ -28,9 +30,13 @@ bool Game::Move(Direction dir) {
 }
 
 bool Game::IsWin() const {
-    for (auto it : board_.value())
-        if (it == end_num_)
+    for (auto it : board_.value()) {
+        if (it == end_num_) {
+            for (auto it : observers_)
+                it->EndOfGame(true);
             return true;
+        }
+    }
     return false;
 }
 

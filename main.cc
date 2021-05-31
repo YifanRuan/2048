@@ -1,4 +1,5 @@
 // #define CLI
+/*
 
 #include <cstdlib>
 #include <ctime>
@@ -21,6 +22,8 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     srand(unsigned(time(nullptr)));
+
+    /*
 
 #ifdef CLI
 
@@ -68,6 +71,7 @@ int main(int argc, char *argv[]) {
     fclose(stdout);
 
 #endif
-
     return 0;
 }
+
+*/

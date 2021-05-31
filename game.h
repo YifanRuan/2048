@@ -2,12 +2,10 @@
 #define GAME_H_
 
 #include "board.h"
-#include "bonus.h"
 #include "direction.h"
-#include "log.h"
-#include "log_move_strategy.h"
+#include "game_observer_interface.h"
 #include "player.h"
-#include <chrono>
+#include <algorithm>
 #include <utility>
 #include <vector>
 
@@ -15,8 +13,9 @@ class Game {
   public:
     Game() = default;
 
-    Game(Board board, std::vector<Player> player, Log log, Bonus bonus,
-         int end_num = 2048);
+    Game(Board board, std::vector<Player> player, int end_num = 2048);
+
+    void Init();
 
     bool Move(Direction dir);
 
@@ -34,17 +33,22 @@ class Game {
 
     void PickRandomNumber();
 
+    inline void AddObserver(GameObserverInterface *observer) {
+        observers_.push_back(observer);
+    }
+
+    inline void RemoveObserver(GameObserverInterface *observer) {
+        observers_.erase(
+            std::find(observers_.begin(), observers_.end(), observer));
+    }
+
   private:
     inline void NextPlayer() { turn_ = (turn_ + 1) % player_.size(); }
 
     Board board_;
     std::vector<Player> player_;
     int turn_, end_num_;
-    // Observer mode
-    Log log_;
-    Bonus bonus_;
-    bool is_first_move_ = true;
-    std::chrono::time_point<std::chrono::system_clock> previous_time_;
+    std::vector<GameObserverInterface *> observers_;
 };
 
 #endif // GAME_H_

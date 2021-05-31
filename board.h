@@ -11,6 +11,8 @@ class Board {
   public:
     Board() = default;
 
+    Board(int side);
+
     Board(std::vector<int> values, int side)
         : value_(std::move(values)), side_(side) {}
 
