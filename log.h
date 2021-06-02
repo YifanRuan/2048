@@ -1,24 +1,19 @@
 #ifndef LOG_H_
 #define LOG_H_
 
-#include "direction.h"
-#include "log_strategy_interface.h"
-#include "player.h"
-#include <chrono>
+#include "log_interface.h"
 #include <cstdio>
+#include <string>
 
-class Log {
+class Log : public LogInterface {
   public:
-    Log() = default;
+    Log();
 
-    Log(bool is_log);
+    virtual ~Log();
 
-    ~Log();
-
-    void PrintLog(const LogStrategyInterface &log) const;
+    void PrintLog(const std::string &log);
 
   private:
-    bool is_log_ = false;
     FILE *fp_ = nullptr;
 };
 

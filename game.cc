@@ -1,6 +1,7 @@
 #include "game.h"
 
 using namespace std;
+using namespace std::chrono;
 
 Game::Game(Board board, vector<Player> player, int end_num)
     : board_(std::move(board)), player_(std::move(player)), end_num_(end_num),
@@ -16,11 +17,12 @@ void Game::Init() {
 bool Game::Move(Direction dir) {
     pair<int, bool> merge_result = board_.Move(dir, &board_);
     if (merge_result.second) {
+        move_time_ = system_clock::now();
         NextPlayer();
         player_[turn_].AddPoint(merge_result.first);
         board_.PickRandomNumber();
         for (auto it : observers_) {
-            it->PointIncremented(merge_result.first);
+            it->PointIncremented(merge_result.first, dir);
             it->NewRound();
         }
         return true;

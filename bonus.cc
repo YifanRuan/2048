@@ -1,17 +1,23 @@
 #include "bonus.h"
-#include "log_bonus_strategy.h"
 
+using namespace std;
 using namespace std::chrono;
 
-int Bonus::GetBonusPoint(const Player &player, const Log &log,
-                         time_point<system_clock> last_time,
-                         time_point<system_clock> cur_time) {
-    if (!is_bonus_)
-        return 0;
-    duration<double> diff = cur_time - last_time;
-    if (diff.count() >= 1.0)
-        return 0;
-    log.PrintLog(LogBonusStrategy{player, system_clock::to_time_t(cur_time),
-                                  diff, bonus_point_});
-    return bonus_point_;
+Bonus::Bonus(Game *g) : g_(g) { g_->AddObserver(this); }
+
+Bonus::~Bonus() { g_->RemoveObserver(this); }
+
+void Bonus::PointIncremented(int inc, Direction dir) {
+    cur_time_ = g_->move_time();
+    if (is_moved_) {
+        duration<double> diff = cur_time_ - last_time_;
+        if (diff.count() < 1.0) {
+            for (auto it : observers_) {
+                it->BonusPointIncremented(bonus_point_, g_->GetCurPlayer());
+            }
+        }
+    } else {
+        is_moved_ = true;
+    }
+    last_time_ = cur_time_;
 }

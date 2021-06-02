@@ -1,24 +1,50 @@
 #ifndef BONUS_H_
 #define BONUS_H_
 
-#include "log.h"
-#include "player.h"
+#include "bonus_observer_interface.h"
+#include "game.h"
+#include "game_observer_interface.h"
+#include <algorithm>
 #include <chrono>
+#include <vector>
 
-class Bonus {
+class Bonus : public GameObserverInterface {
   public:
-    Bonus() = default;
+    Bonus(Game *g);
 
-    Bonus(bool is_bonus) : is_bonus_(is_bonus) {}
+    virtual ~Bonus();
 
-    int
-    GetBonusPoint(const Player &player, const Log &log,
-                  std::chrono::time_point<std::chrono::system_clock> last_time,
-                  std::chrono::time_point<std::chrono::system_clock> cur_time);
+    void GameStart() {}
+
+    void NewRound() {}
+
+    void PointIncremented(int inc, Direction dir);
+
+    void EndOfGame(bool status) {}
+
+    inline void AddObserver(BonusObserverInterface *observer) {
+        observers_.push_back(observer);
+    }
+
+    inline void RemoveObserver(BonusObserverInterface *observer) {
+        observers_.erase(
+            std::find(observers_.begin(), observers_.end(), observer));
+    }
+
+    inline std::chrono::time_point<std::chrono::system_clock> last_time() {
+        return last_time_;
+    }
+
+    inline std::chrono::time_point<std::chrono::system_clock> cur_time() {
+        return cur_time_;
+    }
 
   private:
-    bool is_bonus_;
-    static constexpr int bonus_point_ = 1;
+    Game *g_;
+    static const int bonus_point_ = 1;
+    std::vector<BonusObserverInterface *> observers_;
+    std::chrono::time_point<std::chrono::system_clock> last_time_, cur_time_;
+    bool is_moved_ = false;
 };
 
 #endif // BONUS_H_

@@ -14,7 +14,7 @@ class GameCli : public GameObserverInterface {
 
     void NewRound();
 
-    void PointIncremented(int inc);
+    void PointIncremented(int inc, Direction dir);
 
     void EndOfGame(bool status);
 

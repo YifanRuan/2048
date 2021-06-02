@@ -6,6 +6,7 @@
 #include "game_observer_interface.h"
 #include "player.h"
 #include <algorithm>
+#include <chrono>
 #include <utility>
 #include <vector>
 
@@ -42,6 +43,10 @@ class Game {
             std::find(observers_.begin(), observers_.end(), observer));
     }
 
+    inline std::chrono::time_point<std::chrono::system_clock> move_time() {
+        return move_time_;
+    }
+
   private:
     inline void NextPlayer() { turn_ = (turn_ + 1) % player_.size(); }
 
@@ -49,6 +54,7 @@ class Game {
     std::vector<Player> player_;
     int turn_, end_num_;
     std::vector<GameObserverInterface *> observers_;
+    std::chrono::time_point<std::chrono::system_clock> move_time_;
 };
 
 #endif // GAME_H_

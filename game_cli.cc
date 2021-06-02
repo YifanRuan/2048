@@ -12,7 +12,7 @@ void GameCli::NewRound() {
     printf("It's %s's turn: ", g_->GetNextPlayer().name().c_str());
 }
 
-void GameCli::PointIncremented(int inc) {
+void GameCli::PointIncremented(int inc, Direction dir) {
     printf("\n%s has %d points now.\n\n", g_->GetCurPlayer().name().c_str(),
            g_->GetCurPlayer().point());
 }
