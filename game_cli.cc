@@ -13,8 +13,8 @@ void GameCli::NewRound() {
 }
 
 void GameCli::PointIncremented(int inc, Direction dir) {
-    printf("\n%s has %d points now.\n\n", g_->GetCurPlayer().name().c_str(),
-           g_->GetCurPlayer().point());
+    printf("\n%s has %d points now.\n\n", g_->GetCurPlayer()->name().c_str(),
+           g_->GetCurPlayer()->point());
 }
 
 void GameCli::EndOfGame(bool status) {

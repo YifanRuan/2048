@@ -26,7 +26,7 @@ class Game {
 
     inline std::vector<Player> player() const { return player_; }
 
-    inline Player GetCurPlayer() const { return player_[turn_]; }
+    inline Player *GetCurPlayer() { return &player_[turn_]; }
 
     inline Player GetNextPlayer() const {
         return player_[(turn_ + 1) % player_.size()];

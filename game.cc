@@ -19,7 +19,7 @@ bool Game::Move(Direction dir) {
     if (merge_result.second) {
         move_time_ = system_clock::now();
         NextPlayer();
-        player_[turn_].AddPoint(merge_result.first);
+        GetCurPlayer()->AddPoint(merge_result.first);
         board_.PickRandomNumber();
         for (auto it : observers_) {
             it->PointIncremented(merge_result.first, dir);

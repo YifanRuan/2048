@@ -1,45 +1,42 @@
-Move point:  default Wed Jun  2 16:48:10 2021 Down 4
-Move point:  default Wed Jun  2 16:48:11 2021 Down 4
-Move point:  default Wed Jun  2 16:48:11 2021 Down 8
-Bonus point: default Wed Jun  2 16:48:11 2021 0.5 1
-Move point:  default Wed Jun  2 16:48:12 2021 Right 4
-Bonus point: default Wed Jun  2 16:48:12 2021 0.9 1
-Bonus point: default Wed Jun  2 16:48:15 2021 0.9 1
-Move point:  default Wed Jun  2 16:48:15 2021 Right 4
-Bonus point: default Wed Jun  2 16:48:15 2021 0.5 1
-Move point:  default Wed Jun  2 16:48:17 2021 Down 12
-Bonus point: default Wed Jun  2 16:48:17 2021 0.5 1
-Move point:  default Wed Jun  2 16:48:19 2021 Down 4
-Move point:  default Wed Jun  2 16:48:21 2021 Left 16
-Move point:  default Wed Jun  2 16:48:24 2021 Down 4
-Move point:  default Wed Jun  2 16:48:25 2021 Right 8
-Bonus point: default Wed Jun  2 16:48:25 2021 0.9 1
-Move point:  default Wed Jun  2 16:48:28 2021 Down 4
-Bonus point: default Wed Jun  2 16:48:28 2021 0.6 1
-Move point:  default Wed Jun  2 16:48:30 2021 Down 4
-Move point:  default Wed Jun  2 16:48:32 2021 Right 8
-Bonus point: default Wed Jun  2 16:48:32 2021 0.4 1
-Move point:  default Wed Jun  2 16:48:32 2021 Down 4
-Bonus point: default Wed Jun  2 16:48:32 2021 0.6 1
-Move point:  default Wed Jun  2 16:48:35 2021 Down 8
-Bonus point: default Wed Jun  2 16:48:35 2021 0.7 1
-Move point:  default Wed Jun  2 16:48:35 2021 Left 8
-Bonus point: default Wed Jun  2 16:48:35 2021 0.7 1
-Move point:  default Wed Jun  2 16:48:37 2021 Up 4
-Move point:  default Wed Jun  2 16:48:38 2021 Up 8
-Move point:  default Wed Jun  2 16:48:39 2021 Up 16
-Bonus point: default Wed Jun  2 16:48:39 2021 0.6 1
-Move point:  default Wed Jun  2 16:48:43 2021 Left 4
-Bonus point: default Wed Jun  2 16:48:43 2021 0.8 1
-Bonus point: default Wed Jun  2 16:48:43 2021 0.7 1
-Move point:  default Wed Jun  2 16:48:47 2021 Down 4
-Move point:  default Wed Jun  2 16:48:47 2021 Right 4
-Bonus point: default Wed Jun  2 16:48:47 2021 0.4 1
-Move point:  default Wed Jun  2 16:48:48 2021 Left 8
-Bonus point: default Wed Jun  2 16:48:48 2021 0.9 1
-Move point:  default Wed Jun  2 16:48:51 2021 Down 4
-Move point:  default Wed Jun  2 16:48:56 2021 Right 4
-Bonus point: default Wed Jun  2 16:48:56 2021 0.9 1
-Move point:  default Wed Jun  2 16:48:56 2021 Down 20
-Bonus point: default Wed Jun  2 16:48:56 2021 0.5 1
-Move point:  default Wed Jun  2 16:48:59 2021 Left 32
+Move point : default Thu Jun  3 21:49:16 2021 Down 4
+Bonus point: fuck Thu Jun  3 21:49:16 2021 0.3 1
+Bonus point: default Thu Jun  3 21:49:16 2021 0.2 1
+Move point : fuck Thu Jun  3 21:49:16 2021 Up 4
+Bonus point: fuck Thu Jun  3 21:49:16 2021 0.3 1
+Move point : default Thu Jun  3 21:49:17 2021 Left 12
+Bonus point: default Thu Jun  3 21:49:17 2021 0.2 1
+Bonus point: fuck Thu Jun  3 21:49:17 2021 0.3 1
+Bonus point: default Thu Jun  3 21:49:17 2021 0.3 1
+Move point : fuck Thu Jun  3 21:49:18 2021 Down 4
+Bonus point: fuck Thu Jun  3 21:49:18 2021 0.3 1
+Move point : default Thu Jun  3 21:49:18 2021 Down 8
+Bonus point: default Thu Jun  3 21:49:18 2021 0.2 1
+Move point : fuck Thu Jun  3 21:49:18 2021 Left 4
+Bonus point: fuck Thu Jun  3 21:49:18 2021 0.4 1
+Move point : default Thu Jun  3 21:49:19 2021 Up 4
+Bonus point: default Thu Jun  3 21:49:19 2021 0.5 1
+Bonus point: fuck Thu Jun  3 21:49:19 2021 0.4 1
+Bonus point: default Thu Jun  3 21:49:19 2021 0.2 1
+Bonus point: fuck Thu Jun  3 21:49:20 2021 0.3 1
+Move point : default Thu Jun  3 21:49:20 2021 Left 12
+Bonus point: default Thu Jun  3 21:49:20 2021 0.3 1
+Bonus point: fuck Thu Jun  3 21:49:20 2021 0.3 1
+Move point : default Thu Jun  3 21:49:20 2021 Up 20
+Bonus point: default Thu Jun  3 21:49:20 2021 0.3 1
+Move point : fuck Thu Jun  3 21:49:21 2021 Right 4
+Bonus point: fuck Thu Jun  3 21:49:21 2021 0.5 1
+Move point : default Thu Jun  3 21:49:21 2021 Left 8
+Bonus point: default Thu Jun  3 21:49:21 2021 0.3 1
+Move point : fuck Thu Jun  3 21:49:21 2021 Down 4
+Bonus point: fuck Thu Jun  3 21:49:21 2021 0.2 1
+Move point : default Thu Jun  3 21:49:22 2021 Left 8
+Bonus point: default Thu Jun  3 21:49:22 2021 0.3 1
+Bonus point: fuck Thu Jun  3 21:49:22 2021 0.6 1
+Move point : default Thu Jun  3 21:49:23 2021 Right 20
+Bonus point: default Thu Jun  3 21:49:23 2021 0.3 1
+Bonus point: fuck Thu Jun  3 21:49:23 2021 0.3 1
+Move point : default Thu Jun  3 21:49:23 2021 Left 4
+Bonus point: default Thu Jun  3 21:49:23 2021 0.3 1
+Bonus point: fuck Thu Jun  3 21:49:24 2021 0.3 1
+Move point : default Thu Jun  3 21:49:24 2021 Up 40
+Bonus point: default Thu Jun  3 21:49:24 2021 0.3 1

@@ -20,6 +20,7 @@ class GameCli : public GameObserverInterface {
 
   private:
     void OutputGraph(const Board &board);
+
     Game *g_;
 };
 
