@@ -17,7 +17,7 @@ void LogBonus::BonusPointIncremented(int inc, const Player &player) {
     string s = static_cast<string>(ctime(&cur_time));
     duration<double> diff = b_->cur_time() - b_->last_time();
     stringstream ss;
-    ss << "Bonus point: " << player.name() << " " << s.substr(0, s.length() - 2)
+    ss << "Bonus point: " << player.name() << " " << s.substr(0, s.length() - 1)
        << " " << std::setprecision(1) << diff.count() << " " << inc;
     log_->PrintLog(ss.str());
 }
