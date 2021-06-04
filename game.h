@@ -15,6 +15,8 @@ class Game {
   public:
     Game() = default;
 
+    Game(Board board, GameControllerInterface *c, int end_num = 2048);
+
     Game(Board board, std::vector<Player> player, GameControllerInterface *c,
          int end_num = 2048);
 
@@ -51,6 +53,8 @@ class Game {
     inline void NextPlayer() { turn_ = (turn_ + 1) % player_.size(); }
 
     bool Move(Direction dir);
+
+    void AddPlayer(std::string name);
 
     Board board_;
     std::vector<Player> player_;

@@ -1,5 +1,17 @@
-Move point : default Sat Jun  5 01:29:06 2021 Down 4
-Move point : default Sat Jun  5 01:29:10 2021 Up 4
-Move point : fuck Sat Jun  5 01:29:11 2021 Left 8
-Move point : default Sat Jun  5 01:29:15 2021 Left 4
-Move point : default Sat Jun  5 01:29:17 2021 Up 4
+Move point : Default Sat Jun  5 02:19:12 2021 Right 4
+Bonus point: Default Sat Jun  5 02:19:34 2021 0.9 1
+Move point : Default Sat Jun  5 02:19:35 2021 Left 4
+Bonus point: Default Sat Jun  5 02:19:35 2021 0.5 1
+Move point : Default Sat Jun  5 02:19:36 2021 Down 12
+Bonus point: Default Sat Jun  5 02:19:36 2021 0.7 1
+Bonus point: Default Sat Jun  5 02:19:36 2021 0.9 1
+Move point : Default Sat Jun  5 02:19:37 2021 Right 4
+Bonus point: Default Sat Jun  5 02:19:37 2021 0.7 1
+Move point : Default Sat Jun  5 02:19:38 2021 Down 8
+Bonus point: Default Sat Jun  5 02:19:38 2021 0.6 1
+Move point : Default Sat Jun  5 02:19:38 2021 Left 20
+Bonus point: Default Sat Jun  5 02:19:38 2021 0.6 1
+Move point : Default Sat Jun  5 02:19:43 2021 Up 4
+Move point : Default Sat Jun  5 02:19:44 2021 Left 8
+Bonus point: Default Sat Jun  5 02:19:44 2021 0.5 1
+Move point : Default Sat Jun  5 02:19:45 2021 Up 4

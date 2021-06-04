@@ -13,7 +13,7 @@ using namespace std;
 
 void PlayGame(int argc, const char *argv[]) {
     GameControllerInterface *controller = new GameControllerCli{};
-    Game g{Board{2}, {Player{"default"}, Player{"fuck"}}, controller, 32};
+    Game g{Board{2}, controller, 32};
 
     set<string> ss;
     for (int i = 1; i < argc; ++i) {

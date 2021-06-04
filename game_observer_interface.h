@@ -5,7 +5,8 @@
 
 class GameObserverInterface {
   public:
-    virtual void GameInfo() = 0;
+    virtual void NewGame() = 0;
+    virtual void NewPlayer(int no) = 0;
     virtual void NewRound() = 0;
     virtual void ProcessCommand(std::string) = 0;
     virtual void PointIncremented(int inc, Direction dir) = 0;

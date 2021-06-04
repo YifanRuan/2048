@@ -4,15 +4,34 @@
 using namespace std;
 using namespace std::chrono;
 
+Game::Game(Board board, GameControllerInterface *c, int end_num)
+    : board_(std::move(board)), controller_(c), end_num_(end_num) {}
+
 Game::Game(Board board, vector<Player> player, GameControllerInterface *c,
            int end_num)
     : board_(std::move(board)), player_(std::move(player)), controller_(c),
       end_num_(end_num), turn_(player_.size() - 1) {}
 
 void Game::Init() {
+    if (player_.size() > 0)
+        return;
     for (auto it : observers_)
-        it->GameInfo();
+        it->NewGame();
+    int num = atoll(controller_->GetInput().c_str());
+    turn_ = num - 1;
+    if (num == 1) {
+        num = 0;
+        AddPlayer("Default");
+        return;
+    }
+    for (int i = 1; i <= num; ++i) {
+        for (auto it : observers_)
+            it->NewPlayer(i);
+        AddPlayer(controller_->GetInput());
+    }
 }
+
+void Game::AddPlayer(string name) { player_.push_back(Player{name}); }
 
 bool Game::Move(Direction dir) {
     pair<int, bool> merge_result = board_.Move(dir, &board_);

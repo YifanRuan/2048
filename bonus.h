@@ -14,7 +14,9 @@ class Bonus : public GameObserverInterface {
 
     virtual ~Bonus();
 
-    void GameInfo() {}
+    void NewGame() {}
+
+    void NewPlayer(int no) {}
 
     void NewRound() {}
 

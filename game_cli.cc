@@ -14,8 +14,13 @@ GameCli::~GameCli() {
     delete stragety_;
 }
 
-void GameCli::GameInfo() {
-    // OutputGraph(g_->board());
+void GameCli::NewGame() {
+    printf("Welcome to 2048!\n");
+    printf("Please input a positive integer as the number of players: ");
+}
+
+void GameCli::NewPlayer(int no) {
+    printf("Please input name of player %d: ", no);
 }
 
 void GameCli::NewRound() {
@@ -37,7 +42,6 @@ void GameCli::ProcessCommand(string cmd) {
         vec.push_back(tmp);
     }
     if (vec.size() >= 2 && vec[0] == "c") {
-        // Debug
         delete stragety_;
         stragety_ = new Cheat{g_, g_->GetCurPlayer(), vec[1]};
         is_cheat = true;
@@ -45,14 +49,15 @@ void GameCli::ProcessCommand(string cmd) {
 }
 
 void GameCli::PointIncremented(int inc, Direction dir) {
-    printf("\n%s has %d points now.\n\n", g_->GetCurPlayer()->name().c_str(),
+    printf("\n%s has %d point(s) now.\n\n", g_->GetCurPlayer()->name().c_str(),
            g_->GetCurPlayer()->point());
 }
 
 void GameCli::EndOfGame(bool status) {
+    printf("Game over!\n");
     OutputGraph(g_->board());
     for (auto &it : g_->player()) {
-        printf("%s: %d points.\n", it.name().c_str(), it.point());
+        printf("%s: %d point(s).\n", it.name().c_str(), it.point());
     }
 }
 

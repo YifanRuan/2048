@@ -11,7 +11,9 @@ class LogGame : public GameObserverInterface {
 
     virtual ~LogGame();
 
-    void GameInfo() {}
+    void NewGame() {}
+
+    void NewPlayer(int no) {}
 
     void NewRound() {}
 

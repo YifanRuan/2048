@@ -11,7 +11,9 @@ class GameCli : public GameObserverInterface {
 
     virtual ~GameCli();
 
-    virtual void GameInfo();
+    virtual void NewGame();
+
+    void NewPlayer(int no);
 
     virtual void NewRound();
 
