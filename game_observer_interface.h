@@ -2,6 +2,7 @@
 #define GAME_OBSERVER_INTERFACE_H_
 
 #include "direction.h"
+#include <string>
 
 class GameObserverInterface {
   public:

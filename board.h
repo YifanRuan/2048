@@ -4,7 +4,6 @@
 #include "direction.h"
 #include <map>
 #include <set>
-#include <utility>
 #include <vector>
 
 class Board {
