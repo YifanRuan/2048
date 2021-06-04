@@ -1,8 +1,8 @@
 #include "log.h"
 using namespace std;
 
-Log::Log() { fp_ = fopen("log.txt", "w"); }
+Log::Log() { fp_.open("log.txt"); }
 
-Log::~Log() { fclose(fp_); }
+Log::~Log() { fp_.close(); }
 
-void Log::PrintLog(const string &log) { fprintf(fp_, "%s\n", log.c_str()); }
+void Log::Println(const string &log) { fp_ << log << endl; }

@@ -2,7 +2,7 @@
 #define LOG_H_
 
 #include "log_interface.h"
-#include <cstdio>
+#include <fstream>
 #include <string>
 
 class Log : public LogInterface {
@@ -11,10 +11,10 @@ class Log : public LogInterface {
 
     virtual ~Log();
 
-    void PrintLog(const std::string &log);
+    void Println(const std::string &log);
 
   private:
-    FILE *fp_ = nullptr;
+    std::ofstream fp_;
 };
 
 #endif // LOG_H_

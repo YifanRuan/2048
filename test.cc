@@ -2,25 +2,18 @@
 #include "direction.h"
 #include "game.h"
 #include "game_cli.h"
+#include "game_controller_cli.h"
+#include "game_controller_interface.h"
 #include "log.h"
 #include "log_bonus.h"
 #include "log_game.h"
-#include "log_null.h"
 #include <cstdlib>
 #include <ctime>
 using namespace std;
 
-Direction GetInput() {
-    char c = getchar();
-    while (!char_to_direction.count(c))
-        c = getchar();
-    return char_to_direction[c];
-}
-
-int main(int argc, const char *argv[]) {
-    srand(unsigned(time(nullptr)));
-
-    Game g{Board{4}, {Player{"default"}, Player{"fuck"}}, 32};
+void PlayGame(int argc, const char *argv[]) {
+    GameControllerInterface *controller = new GameControllerCli{};
+    Game g{Board{2}, {Player{"default"}, Player{"fuck"}}, controller, 32};
 
     set<string> ss;
     for (int i = 1; i < argc; ++i) {
@@ -46,8 +39,13 @@ int main(int argc, const char *argv[]) {
 
     GameCli c{&g};
     g.Init();
-    while (!g.IsWin()) {
-        g.Move(GetInput());
+    while (!g.IsEnd()) {
+        g.PlayRound();
     }
+}
+
+int main(int argc, const char *argv[]) {
+    srand(unsigned(time(nullptr)));
+    PlayGame(argc, argv);
     return 0;
 }

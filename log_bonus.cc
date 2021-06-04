@@ -19,5 +19,5 @@ void LogBonus::BonusPointIncremented(int inc, const Player &player) {
     stringstream ss;
     ss << "Bonus point: " << player.name() << " " << s.substr(0, s.length() - 1)
        << " " << std::setprecision(1) << diff.count() << " " << inc;
-    log_->PrintLog(ss.str());
+    log_->Println(ss.str());
 }

@@ -1,0 +1,5 @@
+Move point : default Sat Jun  5 01:29:06 2021 Down 4
+Move point : default Sat Jun  5 01:29:10 2021 Up 4
+Move point : fuck Sat Jun  5 01:29:11 2021 Left 8
+Move point : default Sat Jun  5 01:29:15 2021 Left 4
+Move point : default Sat Jun  5 01:29:17 2021 Up 4

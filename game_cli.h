@@ -1,6 +1,7 @@
 #ifndef GAME_CLI_H_
 #define GAME_CLI_H_
 
+#include "cli_strategy_interface.h"
 #include "game.h"
 #include "game_observer_interface.h"
 
@@ -10,18 +11,23 @@ class GameCli : public GameObserverInterface {
 
     virtual ~GameCli();
 
-    void GameInfo();
+    virtual void GameInfo();
 
-    void NewRound();
+    virtual void NewRound();
 
-    void PointIncremented(int inc, Direction dir);
+    virtual void ProcessCommand(std::string);
 
-    void EndOfGame(bool status);
+    virtual void PointIncremented(int inc, Direction dir);
 
-  private:
+    virtual void EndOfGame(bool status);
+
+  protected:
     void OutputGraph(const Board &board);
 
+  private:
     Game *g_;
+    CliStrategyInterface *stragety_;
+    bool is_cheat = false;
 };
 
 #endif // GAME_CLI_H_

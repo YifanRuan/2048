@@ -15,6 +15,8 @@ class LogGame : public GameObserverInterface {
 
     void NewRound() {}
 
+    void ProcessCommand(std::string) {}
+
     void PointIncremented(int inc, Direction dir);
 
     void EndOfGame(bool status) {}
