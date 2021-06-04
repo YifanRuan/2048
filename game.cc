@@ -8,22 +8,21 @@ Game::Game(Board board, vector<Player> player, int end_num)
       turn_(player.size() - 1) {}
 
 void Game::Init() {
-    for (auto it : observers_) {
-        it->GameStart();
-        it->NewRound();
-    }
+    for (auto it : observers_)
+        it->GameInfo();
 }
 
 bool Game::Move(Direction dir) {
+    for (auto it : observers_)
+        it->NewRound();
     pair<int, bool> merge_result = board_.Move(dir, &board_);
     if (merge_result.second) {
         move_time_ = system_clock::now();
         NextPlayer();
         GetCurPlayer()->AddPoint(merge_result.first);
-        board_.PickRandomNumber();
+        // board_.PickRandomNumber();
         for (auto it : observers_) {
             it->PointIncremented(merge_result.first, dir);
-            it->NewRound();
         }
         return true;
     } else {

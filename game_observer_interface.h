@@ -5,7 +5,7 @@
 
 class GameObserverInterface {
   public:
-    virtual void GameStart() = 0;
+    virtual void GameInfo() = 0;
     virtual void NewRound() = 0;
     virtual void PointIncremented(int inc, Direction dir) = 0;
     virtual void EndOfGame(bool status) = 0;

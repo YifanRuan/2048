@@ -10,7 +10,7 @@ class GameCli : public GameObserverInterface {
 
     virtual ~GameCli();
 
-    void GameStart();
+    void GameInfo();
 
     void NewRound();
 

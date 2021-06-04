@@ -5,10 +5,9 @@ GameCli::GameCli(Game *g) : g_(g) { g_->AddObserver(this); }
 
 GameCli::~GameCli() { g_->RemoveObserver(this); }
 
-void GameCli::GameStart() { ; }
+void GameCli::GameInfo() { OutputGraph(g_->board()); }
 
 void GameCli::NewRound() {
-    OutputGraph(g_->board());
     printf("It's %s's turn: ", g_->GetNextPlayer().name().c_str());
 }
 
