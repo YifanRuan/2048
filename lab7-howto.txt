@@ -1,0 +1,52 @@
+lab7
+阮毅凡 20302010010
+
+lab7-howto
+
+Game 类处理加分, 换玩家等操作, 可以获取当前玩家并操作. 
+在本次 Lab 中, 我给 Game 类增加了一个 vector<GameObserverInterface *> observers_, 就是观察者模式. 
+GameObserverInterface 是一个观察 Game 类的观察者接口, 包含几个函数. 其中一个叫做 void PointIncremented(int inc, Direction dir), 在一次移动操作后进行调用, 接受增加的分数和上次移动的方向. 
+
+然后有一个类叫做 LogInterface, 包含一个函数 void Println(string str), 要求打印这个 str. 
+Log 类实现了 LogInterface, 向 log.txt 打印日志. 
+
+LogGame 类实现了 GameObserverInterface. 
+LogGame 类中有一个指向 LogInterface 的指针 LogInterface *l, 在 LogGame 类构造时进行绑定. 
+LogGame 类在 Game 类调用其 void PointIncremented(int, Direction) 时格式化输出字符串, 同时调用 l->Println(str). 
+日志功能完成. 
+
+Bonus 类实现了 GameObserverInterface. 
+Bonus 类在 Game 类调用其 void PointIncremented(int, Direction) 时判断是否符合加分条件, 符合就向当前用户加分. 
+
+Bonus 类也有观察者, 都实现了 BonusObserverInterface, 包含一个函数 void BonusPointIncremented(int inc, const Player &player), 在成功加分后调用, 接受加的奖励分数和奖励玩家. 
+LogBonus 类实现了 BonusObserverInterface. 
+LogBonus 类中有一个指向 LogInterface 的指针 LogInterface *l, 在 LogGame 类构造时进行绑定. 
+LogBonus 类在 Bonus 类调用其 void BonusPointIncremented(int, const Player&) 时格式化输出字符串, 同时调用 l->Println(str). 
+奖励功能完成. 
+
+大致的运行逻辑: 
+移动操作后->对于每个 Game 观察者执行 void PointIncremented(int, Direction). 
+如果 LogGame 类是观察者(即实现了日志功能), 则向 Log 类输出. 
+如果 Bonus 类是观察者(即实现了奖励功能), 执行判断加分操作. 
+如果 Bonus 执行了加分, 对每个观察 Bonus 的观察者执行 void BonusPointIncremented(int, const Player&). 
+如果同时实现了奖励和日志功能, LogBonus 就会是 Bonus 的观察者, 会再向 Log 类输出. 
+
+二者均不与原先代码耦合, 仅作为 Game 的观察者. 
+而输出到文件也是通过接口实现. 
+
+具体的可以看代码, 每一个类都写在了相应的 .cc/.h 文件中. 
+
+
+附录:
+
+编译命令: 
+g++ *.cc -o main.out
+
+执行命令: 
+./main.out [option]
+
+Option: 
+-t 设置结束为 64
+-s %d 设置棋盘边长
+-log 开启日志功能
+-p 开启奖励功能

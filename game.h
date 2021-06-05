@@ -45,6 +45,8 @@ class Game {
         return move_time_;
     }
 
+    int end_num() const { return end_num_; }
+
   private:
     inline void NextPlayer() { turn_ = (turn_ + 1) % player_.size(); }
 

@@ -16,6 +16,8 @@ GameCli::~GameCli() {
 
 void GameCli::NewGame() {
     printf("Welcome to 2048!\n");
+    printf("Map size: %dx%d, End number: %d\n", g_->board().side(),
+           g_->board().side(), g_->end_num());
     printf("Please input a positive integer as the number of players: ");
 }
 
