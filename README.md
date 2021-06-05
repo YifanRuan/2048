@@ -1,8 +1,11 @@
 # 2048
 Writer: Yifan Ruan ([20302010010](20302010010@fudan.edu.cn))
 
-Latest Build: v0.5-beta, 2021/5/23, a version for automated tests
+Latest Build: v0.6, 2021/6/6, Linux .OUT
 
+# Please read lab7-howto.txt
+# Contents below are subject to change!!!
+# Deprecated!!!
 _Note: For versions after v0.5-beta, use WAZS. For lab6, please read `readme.txt`. For earlier versions, this game uses WASD to control, NOT WAZS._
 
 ## Test Environment
@@ -12,8 +15,6 @@ GCC 9.3.0
 MinGW + GCC 9.3.0
 ### macOS 11.2.3 (latest: v0.5)
 GCC 10.2.0 (Installed from Homebrew)
-
-# Contents below are subject to change!!!
 
 _Note: You have to install [`bits/stdc++.h`](https://github.com/khaveesh/macOS-bits-stdc-.h) first._
 
