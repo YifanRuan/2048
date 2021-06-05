@@ -3,4 +3,4 @@
 
 void PlayGame(int argc, const char *argv[]);
 
-#endif
+#endif // PLAY_H_
