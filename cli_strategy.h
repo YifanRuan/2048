@@ -9,7 +9,7 @@ class CliStrategy : public CliStrategyInterface {
     CliStrategy(Game *g) : g_(g) {}
 
     void OutputPrompt() {
-        printf("\nIt's %s's turn: ", g_->GetNextPlayer().name().c_str());
+        printf("\nIt's %s's turn: ", g_->GetCurPlayer()->name().c_str());
     }
 
   private:

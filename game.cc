@@ -37,7 +37,6 @@ bool Game::Move(Direction dir) {
     pair<int, bool> merge_result = board_.Move(dir, &board_);
     if (merge_result.second) {
         move_time_ = system_clock::now();
-        NextPlayer();
         GetCurPlayer()->AddPoint(merge_result.first);
         board_.PickRandomNumber();
         for (auto it : observers_) {
@@ -66,6 +65,7 @@ bool Game::IsEnd() {
 }
 
 void Game::PlayRound() {
+    NextPlayer();
     for (auto it : observers_)
         it->NewRound();
     while (true) {

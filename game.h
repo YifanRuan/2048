@@ -32,10 +32,6 @@ class Game {
 
     Player *GetCurPlayer() { return &player_[turn_]; }
 
-    Player GetNextPlayer() const {
-        return player_[(turn_ + 1) % player_.size()];
-    }
-
     void AddObserver(GameObserverInterface *observer) {
         observers_.push_back(observer);
     }

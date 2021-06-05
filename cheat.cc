@@ -9,6 +9,6 @@ void Cheat::OutputPrompt() {
                direction_to_char[*dirs.begin()]);
         is_cheated_ = true;
     } else {
-        printf("\nIt's %s's turn: ", g_->GetNextPlayer().name().c_str());
+        printf("\nIt's %s's turn: ", g_->GetCurPlayer()->name().c_str());
     }
 }

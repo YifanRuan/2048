@@ -1,77 +1,51 @@
-// #define CLI
-/*
-
+#include "bonus.h"
+#include "direction.h"
+#include "game.h"
+#include "game_cli.h"
+#include "game_controller_cli.h"
+#include "game_controller_interface.h"
+#include "log.h"
+#include "log_bonus.h"
+#include "log_game.h"
 #include <cstdlib>
 #include <ctime>
-
-#ifdef CLI
-
-#include "game_cli.h"
-
-#else
-
-#include "board.h"
-#include "direction.h"
-#include <cstdio>
-#include <set>
-#include <vector>
-
-#endif
-
 using namespace std;
 
-int main(int argc, char *argv[]) {
-    srand(unsigned(time(nullptr)));
+void PlayGame(int argc, const char *argv[]) {
+    GameControllerInterface *controller = new GameControllerCli{};
+    Game g{Board{2}, controller, 32};
 
-    /*
-
-#ifdef CLI
-
-    GameCli g;
-    g.Init(argc, argv);
-    g.PlayGame();
-
-#else
-
-    if (argc > 4) {
-        freopen(argv[2], "r", stdin);
-        freopen(argv[4], "w", stdout);
+    set<string> ss;
+    for (int i = 1; i < argc; ++i) {
+        ss.insert(static_cast<string>(argv[i]));
     }
-    int k;
-    scanf("%d", &k);
-    vector<int> value(k * k);
-    for (int i = 0; i < k * k; ++i) {
-        scanf("%d", &value[i]);
-    }
-    char c = getchar();
-    while (!char_to_direction.count(c))
-        c = getchar();
-    Direction dir = char_to_direction[c];
+    bool is_log = static_cast<bool>(ss.count("-log")),
+         is_p = static_cast<bool>(ss.count("-p"));
 
-    Board board(value, k);
-    set<Direction> avail_dir = board.AvailableDirections();
-    printf("%lu", avail_dir.size());
-    for (auto it : avail_dir) {
-        printf(" %c", direction_to_char[it]);
+    Log *l = nullptr;
+    LogGame *lg = nullptr;
+    Bonus *b = nullptr;
+    LogBonus *lb = nullptr;
+    if (is_log) {
+        l = new Log{};
+        lg = new LogGame{&g, l};
     }
-    putchar('\n');
-    int point = board.Move(dir, &board).first;
-    value = board.value();
-    for (int i = 0; i < k; ++i) {
-        for (int j = 0; j < k; ++j) {
-            printf("%d%c", value[i * k + j], j == k - 1 ? '\n' : ' ');
-        }
+    if (is_p) {
+        b = new Bonus{&g};
     }
-    pair<int, int> pos = board.PickRandomNumber();
-    if (pos.first != -1 && pos.second != -1) {
-        printf("2\n%d %d\n", pos.first, pos.second);
+    if (is_log && is_p) {
+        lb = new LogBonus{b, l};
     }
-    printf("%d\n", point);
-    fclose(stdin);
-    fclose(stdout);
 
-#endif
-    return 0;
+    GameCli c{&g};
+    g.Init();
+    while (!g.IsEnd()) {
+        g.PlayRound();
+    }
 }
 
-*/
+int main(int argc, const char *argv[]) {
+    srand(unsigned(time(nullptr)));
+    PlayGame(argc, argv);
+    return 0;
+}
