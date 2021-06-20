@@ -61,8 +61,9 @@ void GameCli::ToRetract(int freq) {
     printf("You have %d chances left. Retract? y/n\n", freq);
 }
 
+// TODO: Give status info
 void GameCli::EndOfGame(bool status) {
-    printf("Game over!\n");
+    printf("\nGame over!\n");
     OutputGraph(g_->board());
     for (auto &it : g_->player()) {
         printf("%s: %d point(s).\n", it.name().c_str(), it.point());

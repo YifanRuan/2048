@@ -94,7 +94,6 @@ void Game::PlayRound() {
     // Retraction
     while (retract_freq_[turn_] > 0 && b_.size() > 1) {
         // ask
-        // for (auto it : observers_) it
         for (auto it : observers_) {
             it->BoardToChange();
             it->ToRetract(retract_freq_[turn_]);
@@ -106,10 +105,8 @@ void Game::PlayRound() {
         if (cmd == "n")
             break;
 
-        b_.pop();
-        board_ = b_.top().first;
-        GetCurPlayer()->SetPoint(b_.top().second);
-        retract_freq_[turn_] -= 1;
+        // Retraction Action
+        Retract();
 
         // log
         // ActionPerformed
