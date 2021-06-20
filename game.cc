@@ -4,15 +4,17 @@
 using namespace std;
 using namespace std::chrono;
 
-Game::Game(Board board, GameControllerInterface *c, int end_num)
-    : board_(std::move(board)), controller_(c), end_num_(end_num) {}
+Game::Game(Board board, GameControllerInterface *c, int end_num, int max_freq)
+    : board_(std::move(board)), controller_(c), end_num_(end_num),
+      kMaxRetractFreq(max_freq) {}
 
 Game::Game(Board board, vector<Player> player, GameControllerInterface *c,
-           int end_num)
+           int end_num, int max_freq)
     : board_(std::move(board)), player_(std::move(player)), controller_(c),
-      end_num_(end_num), turn_(player_.size() - 1) {}
+      end_num_(end_num), turn_(player_.size() - 1), kMaxRetractFreq(max_freq) {}
 
 void Game::Init() {
+    b_.push(make_pair(board_, 0));
     if (player_.size() > 0)
         return;
     for (auto it : observers_)
@@ -31,7 +33,10 @@ void Game::Init() {
     }
 }
 
-void Game::AddPlayer(string name) { player_.push_back(Player{name}); }
+void Game::AddPlayer(string name) {
+    player_.push_back(Player{name});
+    retract_freq_.push_back(kMaxRetractFreq);
+}
 
 bool Game::Move(Direction dir) {
     pair<int, bool> merge_result = board_.Move(dir, &board_);
@@ -39,6 +44,7 @@ bool Game::Move(Direction dir) {
         move_time_ = system_clock::now();
         GetCurPlayer()->AddPoint(merge_result.first);
         board_.PickRandomNumber();
+        b_.push(make_pair(board_, merge_result.first));
         for (auto it : observers_) {
             it->PointIncremented(merge_result.first, dir);
         }
@@ -81,6 +87,26 @@ void Game::PlayRound() {
         if (!char_to_direction.count(s[0]))
             continue;
         if (Move(char_to_direction[s[0]]))
+            break;
+    }
+
+    // Retraction
+    while (retract_freq_[turn_] > 0 && b_.size() > 1) {
+        // ask
+        printf("You have %d times left. Retract? y/n\n", retract_freq_[turn_]);
+        // Command
+        string cmd = controller_->GetInput();
+        while (cmd != "y" && cmd != "n")
+            cmd = controller_->GetInput();
+        if (cmd == "n")
+            break;
+
+        b_.pop();
+        board_ = b_.top().first;
+        GetCurPlayer()->AddPoint(-b_.top().second);
+        retract_freq_[turn_] -= 1;
+        // log
+        if (player_.size() > 1)
             break;
     }
 }

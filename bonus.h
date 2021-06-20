@@ -26,20 +26,20 @@ class Bonus : public GameObserverInterface {
 
     void EndOfGame(bool status) {}
 
-    inline void AddObserver(BonusObserverInterface *observer) {
+    void AddObserver(BonusObserverInterface *observer) {
         observers_.push_back(observer);
     }
 
-    inline void RemoveObserver(BonusObserverInterface *observer) {
+    void RemoveObserver(BonusObserverInterface *observer) {
         observers_.erase(
             std::find(observers_.begin(), observers_.end(), observer));
     }
 
-    inline std::chrono::time_point<std::chrono::system_clock> last_time() {
+    std::chrono::time_point<std::chrono::system_clock> last_time() {
         return last_time_;
     }
 
-    inline std::chrono::time_point<std::chrono::system_clock> cur_time() {
+    std::chrono::time_point<std::chrono::system_clock> cur_time() {
         return cur_time_;
     }
 

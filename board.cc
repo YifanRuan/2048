@@ -9,6 +9,16 @@ Board::Board(int side) : side_(side) {
     PickRandomNumber();
 }
 
+/*
+Board::Board(const Board &other) : side_(other.side()) {
+    // TODO: Optimize
+    value_.clear();
+    for (auto it : other.value()) {
+        value_.push_back(it);
+    }
+}
+*/
+
 pair<int, bool> Board::Move(Direction direction, Board *to_board) {
     Board board{value_, side_}, *p_board;
     if (to_board != this) {

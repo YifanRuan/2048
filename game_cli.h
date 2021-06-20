@@ -24,6 +24,7 @@ class GameCli : public GameObserverInterface {
     virtual void EndOfGame(bool status);
 
   protected:
+    // Is is protected?
     void OutputGraph(const Board &board);
 
   private:

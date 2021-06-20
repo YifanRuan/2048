@@ -13,6 +13,7 @@ void Bonus::PointIncremented(int inc, Direction dir) {
         duration<double> diff = cur_time_ - last_time_;
         if (diff.count() < 1.0) {
             g_->GetCurPlayer()->AddPoint(bonus_point_);
+            // TODO: Add to the retraction sequence
             for (auto it : observers_) {
                 it->BonusPointIncremented(bonus_point_, *(g_->GetCurPlayer()));
             }

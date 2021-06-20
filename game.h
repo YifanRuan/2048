@@ -8,6 +8,8 @@
 #include "player.h"
 #include <algorithm>
 #include <chrono>
+#include <map>
+#include <stack>
 #include <utility>
 #include <vector>
 
@@ -15,10 +17,11 @@ class Game {
   public:
     Game() = default;
 
-    Game(Board board, GameControllerInterface *c, int end_num = 2048);
+    Game(Board board, GameControllerInterface *c, int end_num = 2048,
+         int max_freq = 3);
 
     Game(Board board, std::vector<Player> player, GameControllerInterface *c,
-         int end_num = 2048);
+         int end_num = 2048, int max_freq = 3);
 
     void Init();
 
@@ -48,7 +51,7 @@ class Game {
     int end_num() const { return end_num_; }
 
   private:
-    inline void NextPlayer() { turn_ = (turn_ + 1) % player_.size(); }
+    void NextPlayer() { turn_ = (turn_ + 1) % player_.size(); }
 
     bool Move(Direction dir);
 
@@ -60,6 +63,11 @@ class Game {
     std::vector<GameObserverInterface *> observers_;
     std::chrono::time_point<std::chrono::system_clock> move_time_;
     GameControllerInterface *controller_;
+
+    const int kMaxRetractFreq;
+    // TODO: use another data structure, Player isn't comparable
+    std::vector<int> retract_freq_;
+    std::stack<std::pair<Board, int>> b_;
 };
 
 #endif // GAME_H_

@@ -15,11 +15,11 @@ class Player {
 
     void AddPoint(int p) { point_ += p; }
 
-    inline std::string name() const { return name_; }
+    std::string name() const { return name_; }
 
-    inline int point() const { return point_; }
+    int point() const { return point_; }
 
-    inline void SetPoint(int point) { point_ = point; }
+    void SetPoint(int point) { point_ = point; }
 
   private:
     std::string name_;

@@ -15,22 +15,24 @@ class Board {
     Board(std::vector<int> values, int side)
         : value_(std::move(values)), side_(side) {}
 
+    // Board(const Board &other);
+
     std::pair<int, bool> Move(Direction direction, Board *to_board);
 
     std::set<Direction> AvailableDirections();
 
     std::pair<int, int> PickRandomNumber();
 
-    inline std::vector<int> value() const { return value_; }
+    std::vector<int> value() const { return value_; }
 
-    inline int side() const { return side_; }
+    int side() const { return side_; }
 
   private:
-    inline std::pair<int, int> SingleToPair(int position) const {
+    std::pair<int, int> SingleToPair(int position) const {
         return std::make_pair(position / side_, position % side_);
     }
 
-    inline int PairToSingle(std::pair<int, int> position) const {
+    int PairToSingle(std::pair<int, int> position) const {
         return position.first * side_ + position.second;
     }
 
