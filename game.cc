@@ -105,12 +105,18 @@ void Game::PlayRound() {
         if (cmd == "n")
             break;
 
-        // Retraction Action
         Retract();
-
         // log
         // ActionPerformed
+
         if (player_.size() > 1)
             break;
     }
+}
+
+void Game::Retract() {
+    b_.pop();
+    board_ = b_.top().first;
+    GetCurPlayer()->SetPoint(b_.top().second);
+    retract_freq_[turn_] -= 1;
 }

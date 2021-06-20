@@ -50,12 +50,7 @@ class Game {
 
     int end_num() const { return end_num_; }
 
-    void Retract() {
-        b_.pop();
-        board_ = b_.top().first;
-        GetCurPlayer()->SetPoint(b_.top().second);
-        retract_freq_[turn_] -= 1;
-    }
+    void Retract();
 
   private:
     void NextPlayer() { turn_ = (turn_ + 1) % player_.size(); }
