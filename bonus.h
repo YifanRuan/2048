@@ -24,6 +24,10 @@ class Bonus : public GameObserverInterface {
 
     void PointIncremented(int inc, Direction dir);
 
+    void BoardToChange() {}
+
+    void ToRetract(int freq) {}
+
     void EndOfGame(bool status) {}
 
     void AddObserver(BonusObserverInterface *observer) {
@@ -49,6 +53,7 @@ class Bonus : public GameObserverInterface {
     std::vector<BonusObserverInterface *> observers_;
     std::chrono::time_point<std::chrono::system_clock> last_time_, cur_time_;
     bool is_moved_ = false;
+    static constexpr double diff_time_ = 1.0;
 };
 
 #endif // BONUS_H_

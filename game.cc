@@ -44,10 +44,11 @@ bool Game::Move(Direction dir) {
         move_time_ = system_clock::now();
         GetCurPlayer()->AddPoint(merge_result.first);
         board_.PickRandomNumber();
-        b_.push(make_pair(board_, merge_result.first));
+        // action
         for (auto it : observers_) {
             it->PointIncremented(merge_result.first, dir);
         }
+        b_.push(make_pair(board_, GetCurPlayer()->point()));
         return true;
     } else {
         return false;
@@ -93,7 +94,11 @@ void Game::PlayRound() {
     // Retraction
     while (retract_freq_[turn_] > 0 && b_.size() > 1) {
         // ask
-        printf("You have %d times left. Retract? y/n\n", retract_freq_[turn_]);
+        // for (auto it : observers_) it
+        for (auto it : observers_) {
+            it->BoardToChange();
+            it->ToRetract(retract_freq_[turn_]);
+        }
         // Command
         string cmd = controller_->GetInput();
         while (cmd != "y" && cmd != "n")
@@ -103,9 +108,11 @@ void Game::PlayRound() {
 
         b_.pop();
         board_ = b_.top().first;
-        GetCurPlayer()->AddPoint(-b_.top().second);
+        GetCurPlayer()->SetPoint(b_.top().second);
         retract_freq_[turn_] -= 1;
+
         // log
+        // ActionPerformed
         if (player_.size() > 1)
             break;
     }

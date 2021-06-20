@@ -11,9 +11,9 @@ void Bonus::PointIncremented(int inc, Direction dir) {
     cur_time_ = g_->move_time();
     if (is_moved_) {
         duration<double> diff = cur_time_ - last_time_;
-        if (diff.count() < 1.0) {
+        if (diff.count() < diff_time_) {
+            printf("fuckyou\n");
             g_->GetCurPlayer()->AddPoint(bonus_point_);
-            // TODO: Add to the retraction sequence
             for (auto it : observers_) {
                 it->BonusPointIncremented(bonus_point_, *(g_->GetCurPlayer()));
             }

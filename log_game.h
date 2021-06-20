@@ -21,6 +21,10 @@ class LogGame : public GameObserverInterface {
 
     void PointIncremented(int inc, Direction dir);
 
+    void BoardToChange() {}
+
+    void ToRetract(int freq) {}
+
     void EndOfGame(bool status) {}
 
   private:

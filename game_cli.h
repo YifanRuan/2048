@@ -21,6 +21,10 @@ class GameCli : public GameObserverInterface {
 
     virtual void PointIncremented(int inc, Direction dir);
 
+    virtual void BoardToChange();
+
+    virtual void ToRetract(int freq);
+
     virtual void EndOfGame(bool status);
 
   protected:
@@ -28,6 +32,11 @@ class GameCli : public GameObserverInterface {
     void OutputGraph(const Board &board);
 
   private:
+    void Prompt() {
+        printf("%s has %d point(s) now.\n", g_->GetCurPlayer()->name().c_str(),
+               g_->GetCurPlayer()->point());
+    }
+
     Game *g_;
     CliStrategyInterface *stragety_;
     bool is_cheat = false;

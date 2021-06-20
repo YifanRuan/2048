@@ -11,6 +11,8 @@ class GameObserverInterface {
     virtual void NewRound() = 0;
     virtual void ProcessCommand(std::string) = 0;
     virtual void PointIncremented(int inc, Direction dir) = 0;
+    virtual void BoardToChange() = 0;
+    virtual void ToRetract(int freq) = 0;
     virtual void EndOfGame(bool status) = 0;
 };
 

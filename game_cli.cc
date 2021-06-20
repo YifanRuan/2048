@@ -26,7 +26,7 @@ void GameCli::NewPlayer(int no) {
 }
 
 void GameCli::NewRound() {
-    OutputGraph(g_->board());
+    BoardToChange();
     stragety_->OutputPrompt();
 }
 
@@ -50,9 +50,15 @@ void GameCli::ProcessCommand(string cmd) {
     }
 }
 
-void GameCli::PointIncremented(int inc, Direction dir) {
-    printf("\n%s has %d point(s) now.\n\n", g_->GetCurPlayer()->name().c_str(),
-           g_->GetCurPlayer()->point());
+void GameCli::PointIncremented(int inc, Direction dir) { Prompt(); }
+
+void GameCli::BoardToChange() {
+    OutputGraph(g_->board());
+    Prompt();
+}
+
+void GameCli::ToRetract(int freq) {
+    printf("You have %d chances left. Retract? y/n\n", freq);
 }
 
 void GameCli::EndOfGame(bool status) {
@@ -76,6 +82,7 @@ void GameCli::OutputGraph(const Board &board) {
             printf("|%5d", value[side * row + i]);
         printf("|\n");
     };
+    printf("\n");
     for (int i = 0; i < side; ++i) {
         OutputDivs();
         OutputNums(i);
