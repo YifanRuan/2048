@@ -1,4 +1,5 @@
 #include "play.h"
+#include "action_listener_interface.h"
 #include "bonus.h"
 #include "direction.h"
 #include "game.h"
@@ -6,8 +7,6 @@
 #include "game_controller_cli.h"
 #include "game_controller_interface.h"
 #include "log.h"
-#include "log_bonus.h"
-#include "log_game.h"
 #include "util.h"
 using namespace std;
 
@@ -19,19 +18,14 @@ void PlayGame(int argc, const char *argv[]) {
     bool is_log = static_cast<bool>(GetArg(argc, argv, false, "-log")),
          is_p = static_cast<bool>(GetArg(argc, argv, false, "-p"));
 
-    Log *l = nullptr;
-    LogGame *lg = nullptr;
+    ActionListenerInterface *l = nullptr;
     Bonus *b = nullptr;
-    LogBonus *lb = nullptr;
+
     if (is_log) {
-        l = new Log{};
-        lg = new LogGame{&g, l};
+        l = new Log{&g};
     }
     if (is_p) {
         b = new Bonus{&g};
-    }
-    if (is_log && is_p) {
-        lb = new LogBonus{b, l};
     }
 
     GameCli c{&g};
@@ -39,4 +33,12 @@ void PlayGame(int argc, const char *argv[]) {
     while (!g.IsEnd()) {
         g.PlayRound();
     }
+
+    if (is_p) {
+        delete b;
+    }
+    if (is_log) {
+        delete l;
+    }
+    delete controller;
 }

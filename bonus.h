@@ -1,7 +1,6 @@
 #ifndef BONUS_H_
 #define BONUS_H_
 
-#include "bonus_observer_interface.h"
 #include "game.h"
 #include "game_observer_interface.h"
 #include <algorithm>
@@ -30,15 +29,9 @@ class Bonus : public GameObserverInterface {
 
     void EndOfGame(bool status) {}
 
-    void AddObserver(BonusObserverInterface *observer) {
-        observers_.push_back(observer);
-    }
+    std::string BonusInfo(int inc);
 
-    void RemoveObserver(BonusObserverInterface *observer) {
-        observers_.erase(
-            std::find(observers_.begin(), observers_.end(), observer));
-    }
-
+    /*
     std::chrono::time_point<std::chrono::system_clock> last_time() {
         return last_time_;
     }
@@ -46,14 +39,14 @@ class Bonus : public GameObserverInterface {
     std::chrono::time_point<std::chrono::system_clock> cur_time() {
         return cur_time_;
     }
+    */
 
   private:
     Game *g_;
     static const int bonus_point_ = 1;
-    std::vector<BonusObserverInterface *> observers_;
     std::chrono::time_point<std::chrono::system_clock> last_time_, cur_time_;
     bool is_moved_ = false;
-    static constexpr double diff_time_ = 1.0;
+    static constexpr double diff_time_ = 3.0;
 };
 
 #endif // BONUS_H_

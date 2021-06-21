@@ -14,7 +14,7 @@ Game::Game(Board board, vector<Player> player, GameControllerInterface *c,
       end_num_(end_num), turn_(player_.size() - 1), kMaxRetractFreq(max_freq) {}
 
 void Game::Init() {
-    b_.push(make_pair(board_, 0));
+    b_.push(board_);
     if (player_.size() > 0)
         return;
     for (auto it : observers_)
@@ -42,17 +42,28 @@ bool Game::Move(Direction dir) {
     pair<int, bool> merge_result = board_.Move(dir, &board_);
     if (merge_result.second) {
         move_time_ = system_clock::now();
-        GetCurPlayer()->AddPoint(merge_result.first);
+        GetCurPlayer()->AddNewPoint(merge_result.first);
         board_.PickRandomNumber();
-        // action
+        ActionPerformed(MoveInfo(merge_result.first, dir));
         for (auto it : observers_) {
             it->PointIncremented(merge_result.first, dir);
         }
-        b_.push(make_pair(board_, GetCurPlayer()->point()));
+        b_.push(board_);
         return true;
     } else {
         return false;
     }
+}
+
+string Game::MoveInfo(int inc, Direction dir) {
+    if (inc <= 0)
+        return "";
+    time_t cur_time = system_clock::to_time_t(move_time());
+    string s = static_cast<string>(ctime(&cur_time));
+    string ret = "Move point :" + GetCurPlayer()->name() + " " +
+                 s.substr(0, s.length() - 1) + " " + direction_to_string[dir] +
+                 " " + to_string(inc);
+    return ret;
 }
 
 bool Game::IsEnd() {
@@ -72,7 +83,8 @@ bool Game::IsEnd() {
 }
 
 void Game::PlayRound() {
-    NextPlayer();
+    if (is_retracted_ == false || player_.size() == 1)
+        NextPlayer();
     for (auto it : observers_)
         it->NewRound();
     while (true) {
@@ -92,6 +104,7 @@ void Game::PlayRound() {
     }
 
     // Retraction
+    is_retracted_ = false;
     while (retract_freq_[turn_] > 0 && b_.size() > 1) {
         // ask
         for (auto it : observers_) {
@@ -105,18 +118,40 @@ void Game::PlayRound() {
         if (cmd == "n")
             break;
 
-        Retract();
-        // log
-        // ActionPerformed
+        ActionPerformed(RetractInfo(Retract()));
 
         if (player_.size() > 1)
             break;
     }
 }
 
-void Game::Retract() {
-    b_.pop();
-    board_ = b_.top().first;
-    GetCurPlayer()->SetPoint(b_.top().second);
+int Game::Retract() {
+    int prev_point = GetCurPlayer()->point();
+    BoardRollback();
+    GetCurPlayer()->RollBack();
     retract_freq_[turn_] -= 1;
+    is_retracted_ = true;
+    // is it right?
+    return GetCurPlayer()->point() - prev_point;
+}
+
+string Game::RetractInfo(int dec) {
+    if (dec == 0)
+        return "";
+    time_t cur_time = system_clock::to_time_t(move_time());
+    string s = static_cast<string>(ctime(&cur_time));
+    string ret = "Retract point : " + GetCurPlayer()->name() + " " +
+                 s.substr(0, s.length() - 1) + " " + to_string(dec);
+    return ret;
+}
+
+void Game::ActionPerformed(std::string info) {
+    for (auto it : actions_) {
+        it->ActionPerformed(info);
+    }
+}
+
+void Game::BoardRollback() {
+    b_.pop();
+    board_ = b_.top();
 }
