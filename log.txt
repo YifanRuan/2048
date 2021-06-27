@@ -1,4 +1,0 @@
-Move point :1 Tue Jun 22 00:46:44 2021 Down 4
-Bonus point: 1 Tue Jun 22 00:46:49 2021 2 1
-Retract point : 1 Tue Jun 22 00:46:49 2021 -1
-Bonus point: 2 Tue Jun 22 00:46:58 2021 1 1

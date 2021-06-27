@@ -131,7 +131,6 @@ int Game::Retract() {
     GetCurPlayer()->RollBack();
     retract_freq_[turn_] -= 1;
     is_retracted_ = true;
-    // is it right?
     return GetCurPlayer()->point() - prev_point;
 }
 
