@@ -1,7 +1,7 @@
 # 2048
 Writer: Yifan Ruan ([20302010010](20302010010@fudan.edu.cn))
 
-Latest Build: v1.0, 2021/6/27, Linux .OUT
+Latest Build: v1.1, 2021/6/28, Windows .EXE, Linux .OUT
 
 _Note: **For lab8, please read `lab8-analysis.md`.** For lab7, please read `lab7-howto.txt`. For lab6, please read `readme.txt`._
 _Note: **For versions after v0.5-beta, use WAZS.** For earlier versions, this game uses WASD to control, NOT WAZS._
