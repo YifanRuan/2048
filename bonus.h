@@ -46,7 +46,7 @@ class Bonus : public GameObserverInterface {
     static const int bonus_point_ = 1;
     std::chrono::time_point<std::chrono::system_clock> last_time_, cur_time_;
     bool is_moved_ = false;
-    static constexpr double diff_time_ = 3.0;
+    static constexpr double diff_time_ = 1.0;
 };
 
 #endif // BONUS_H_
